@@ -1,0 +1,111 @@
+BadRequest:
+  description: 'Your request contains invalid or malformed data.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'fail'
+        statusCode: 400
+        message: 'Invalid request data'
+        errors:
+          - path: 'parameter'
+            message: 'Required parameter is missing or invalid'
+Unauthorized:
+  description: 'Authentication is required to access this resource.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 401
+        message: 'Authentication required'
+        errors:
+          - path: 'authorization'
+            message: 'Authentication token missing or invalid'
+Forbidden:
+  description: 'You do not have permission to access this resource.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 403
+        message: 'Access forbidden'
+        errors:
+          - path: 'resource'
+            message: 'You do not have the necessary permissions for this resource'
+NotFound:
+  description: 'The resource you are looking for could not be found.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 404
+        message: 'Resource not found'
+        errors:
+          - path: 'resource'
+            message: 'The specified resource could not be located'
+MethodNotAllowed:
+  description: 'The method you used is not allowed for this resource.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 405
+        message: 'HTTP method not allowed'
+        errors:
+          - path: 'method'
+            message: 'The method used in the request is not supported for this resource'
+Conflict:
+  description: 'There is a conflict with the current state of the resource.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 409
+        message: 'Conflict with the current resource state'
+        errors:
+          - path: 'resource'
+            message: 'The resource is in a conflicting state and cannot be processed'
+InternalServerError:
+  description: 'An unexpected error occurred on the server.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 500
+        message: 'An internal server error occurred'
+        errors: []
+BadGateway:
+  description: 'The server received an invalid response from an upstream server.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 502
+        message: 'Bad gateway'
+        errors: []
+ServiceUnavailable:
+  description: 'The service is temporarily unavailable due to maintenance or overload.'
+  content:
+    application/json:
+      schema:
+        $ref: './schemas.yaml#/ErrorResponse'
+      example:
+        status: 'error'
+        statusCode: 503
+        message: 'Service unavailable'
+        errors: []

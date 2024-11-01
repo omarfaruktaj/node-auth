@@ -1,0 +1,169 @@
+UserId:
+  name: userId
+  in: path
+  description: 'ID of the user to retrieve'
+  required: true
+  schema:
+    type: string
+ProductId:
+  name: productId
+  in: path
+  description: 'ID of the product to retrieve'
+  required: true
+  schema:
+    type: string
+# -----------------------------------------------------
+# Common
+# -----------------------------------------------------
+
+Limit:
+  name: 'limit'
+  in: 'query'
+  description: 'The number of items to return per page.'
+  required: false
+  schema:
+    type: integer
+    example: 10
+
+Offset:
+  name: 'offset'
+  in: 'query'
+  description: 'The number of items to skip before starting to collect the result set.'
+  required: false
+  schema:
+    type: integer
+    example: 0
+
+Sort:
+  name: 'sort'
+  in: 'query'
+  description: 'The field by which to sort the results.'
+  required: false
+  schema:
+    type: string
+    example: 'createdAt'
+
+Order:
+  name: 'order'
+  in: 'query'
+  description: 'The order in which to sort the results. Can be either ascending or descending.'
+  required: false
+  schema:
+    type: string
+    enum:
+      - 'asc'
+      - 'desc'
+    example: 'asc'
+
+Filter:
+  name: 'filter'
+  in: 'query'
+  description: 'A filter to apply to the results. Can be a JSON object.'
+  required: false
+  schema:
+    type: string
+    example: '{"status": "active"}'
+
+Search:
+  name: 'search'
+  in: 'query'
+  description: 'A search term to filter the results.'
+  required: false
+  schema:
+    type: string
+    example: 'example search term'
+
+Include:
+  name: 'include'
+  in: 'query'
+  description: 'Related resources to include in the response.'
+  required: false
+  schema:
+    type: string
+    example: 'comments,likes'
+
+Fields:
+  name: 'fields'
+  in: 'query'
+  description: 'Comma-separated list of fields to include in the response.'
+  required: false
+  schema:
+    type: string
+    example: 'id,name,email'
+
+Page:
+  name: 'page'
+  in: 'query'
+  description: 'The page number to retrieve for pagination.'
+  required: false
+  schema:
+    type: integer
+    example: 1
+
+Status:
+  name: 'status'
+  in: 'query'
+  description: 'Filter results based on a specific status.'
+  required: false
+  schema:
+    type: string
+    example: 'active'
+
+DateFrom:
+  name: 'dateFrom'
+  in: 'query'
+  description: 'Filter results created after this date.'
+  required: false
+  schema:
+    type: string
+    format: date
+    example: '2023-01-01'
+
+DateTo:
+  name: 'dateTo'
+  in: 'query'
+  description: 'Filter results created before this date.'
+  required: false
+  schema:
+    type: string
+    format: date
+    example: '2023-12-31'
+
+ClientId:
+  name: 'clientId'
+  in: 'query'
+  description: 'Filter results associated with a specific client.'
+  required: false
+  schema:
+    type: string
+    example: 'client_12345'
+
+Authorization:
+  name: Authorization
+  in: header
+  description: 'Bearer token for authentication.'
+  required: true
+  schema:
+    type: string
+    example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+
+Content-Type:
+  name: Content-Type
+  in: header
+  description: 'The media type of the resource.'
+  required: true
+  schema:
+    type: string
+    enum:
+      - 'application/json'
+      - 'multipart/form-data'
+    example: 'application/json'
+
+Accept-Language:
+  name: Accept-Language
+  in: header
+  description: 'The preferred language for the response.'
+  required: false
+  schema:
+    type: string
+    example: 'en-US'

@@ -1,0 +1,103 @@
+Authorization:
+  description: 'The token used for authenticating API requests.'
+  required: true
+  schema:
+    type: string
+    example: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX9...'
+Content-Type:
+  description: 'The media type of the resource.'
+  required: true
+  schema:
+    type: string
+    enum:
+      - 'application/json'
+      - 'application/xml'
+      - 'text/plain'
+      - 'multipart/form-data'
+    example: 'application/json'
+Accept:
+  description: 'The media types that are acceptable for the response.'
+  required: true
+  schema:
+    type: string
+    enum:
+      - 'application/json'
+      - 'application/xml'
+      - 'text/html'
+    example: 'application/json'
+User-Agent:
+  description: 'The user agent string identifying the client software making the request.'
+  required: false
+  schema:
+    type: string
+    example: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+Accept-Encoding:
+  description: 'The content encodings that are acceptable for the response.'
+  required: false
+  schema:
+    type: string
+    enum:
+      - 'gzip'
+      - 'deflate'
+      - 'br'
+    example: 'gzip, deflate'
+Cache-Control:
+  description: 'Directives for caching mechanisms in both requests and responses.'
+  required: false
+  schema:
+    type: string
+    enum:
+      - 'no-cache'
+      - 'no-store'
+      - 'max-age=3600'
+    example: 'no-cache'
+Location:
+  description: 'The URL of the newly created resource or the URL to redirect to.'
+  required: false
+  schema:
+    type: string
+    format: uri
+    example: 'https://api.example.com/users/123'
+X-Request-ID:
+  description: 'A unique identifier for the request, useful for tracing and debugging.'
+  required: false
+  schema:
+    type: string
+    example: 'e4eaaaf2-d142-4b83-b3f6-fb8524e8f3e1'
+Content-Length:
+  description: 'The length of the request or response body in bytes.'
+  required: false
+  schema:
+    type: integer
+    example: 1234
+ETag:
+  description: 'A unique identifier for a specific version of a resource, used for cache validation.'
+  required: false
+  schema:
+    type: string
+    example: '"123456789abcdef"'
+Origin:
+  description: 'The origin of the request, used in CORS to determine if the request should be allowed.'
+  required: false
+  schema:
+    type: string
+    format: uri
+    example: 'https://www.example.com'
+X-RateLimit-Limit:
+  description: 'The maximum number of requests allowed in a given time period.'
+  required: false
+  schema:
+    type: integer
+    example: 1000
+X-RateLimit-Remaining:
+  description: 'The number of remaining requests allowed in the current time window.'
+  required: false
+  schema:
+    type: integer
+    example: 999
+X-RateLimit-Reset:
+  description: 'The time at which the current rate limit window resets, in Unix timestamp format.'
+  required: false
+  schema:
+    type: integer
+    example: 1625284800

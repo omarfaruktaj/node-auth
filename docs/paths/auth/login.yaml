@@ -1,0 +1,55 @@
+post:
+  summary: 'Login a user'
+  description: 'Log in a user to the system. The request body must include the required fields: email and password.'
+  operationId: loginUser
+  tags:
+    - Auth
+  parameters:
+    - $ref: '../../components/parameters.yaml#/Content-Type'
+  requestBody:
+    required: true
+    description: 'Payload to login the user.'
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/LoginUser'
+  responses:
+    '200':
+      description: 'User logged in successfully.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: 'Indicates the status of the response (e.g., "success").'
+                example: 'success'
+              statusCode:
+                type: integer
+                description: 'HTTP status code for the response.'
+                example: 200
+              message:
+                type: string
+                description: 'A descriptive message about the response.'
+                example: 'User logged in successfully.'
+              data:
+                all of:
+                  type: object
+                  description: 'The user data.'
+                  properties:
+                    $ref: '../../components/schemas.yaml#/User'
+                  $ref: '../../components/schemas.yaml#/Timestamp'
+            required:
+              - status
+              - statusCode
+              - message
+              - data
+    '400':
+      $ref: '../../components/errorResponses.yaml#/BadRequest'
+    '409':
+      $ref: '../../components/errorResponses.yaml#/Conflict'
+    '404':
+      $ref: '../../components/errorResponses.yaml#/NotFound'
+    '500':
+      $ref: '../../components/errorResponses.yaml#/InternalServerError'

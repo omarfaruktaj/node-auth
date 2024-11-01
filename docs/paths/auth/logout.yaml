@@ -1,0 +1,55 @@
+post:
+  summary: 'Log out a user'
+  description: 'Logs out the user by invalidating the provided refresh token. This action will also revoke any active sessions associated with the token.'
+  operationId: logoutUser
+  security:
+    - bearerAuth: []
+  tags:
+    - Auth
+  parameters:
+    - $ref: '../../components/parameters.yaml#/Authorization'
+    - $ref: '../../components/parameters.yaml#/Content-Type'
+  requestBody:
+    required: true
+    description: 'Payload to log out the user by providing the refresh token.'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            refreshToken:
+              type: string
+              description: 'The refresh token to invalidate.'
+              example: 'eyJhbGciOiJIUzI1NiIsInR...'
+          required:
+            - refreshToken
+  responses:
+    '204':
+      description: User logged out successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: 'Indicates the status of the response (e.g., "success").'
+                example: 'success'
+              statusCode:
+                type: integer
+                description: 'HTTP status code for the response.'
+                example: 204
+              message:
+                type: string
+                description: 'A descriptive message about the response.'
+                example: 'User logged out successfully.'
+            required:
+              - status
+              - statusCode
+              - message
+    '401':
+      $ref: '../../components/errorResponses.yaml#/Unauthorized'
+    '404':
+      $ref: '../../components/errorResponses.yaml#/NotFound'
+    '500':
+      $ref: '../../components/errorResponses.yaml#/InternalServerError'

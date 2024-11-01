@@ -1,0 +1,222 @@
+# -----------------------------------------------------
+# User Schemas
+# -----------------------------------------------------
+
+User:
+  type: object
+  properties:
+    _id:
+      type: string
+      format: objectId
+      example: '60c72b2f5f1b2c001f8d4e90'
+    name:
+      type: string
+      example: 'John'
+    email:
+      type: string
+      example: 'user@example.com'
+    password:
+      type: string
+      format: password
+      example: 'P@ssw0rd!'
+    phoneNumber:
+      type: string
+      example: '+1234567890'
+    role:
+      type: string,
+      default: user
+      enum: [user, admin]
+      example: 'Customer'
+    isActive:
+      type: boolean
+      example: true
+    passwordChangeAt:
+      type: data
+      example:
+
+Register:
+  type: object
+  properties:
+    name:
+      type: string
+      example: 'John'
+    email:
+      type: string
+      example: 'user@example.com'
+    password:
+      type: string
+      format: password
+      example: 'P@ssw0rd!'
+    phoneNumber:
+      type: string
+      example: '+1234567890'
+    role:
+      type: string,
+      default: user
+      enum: [user, admin]
+      example: 'Customer'
+  required:
+    - name
+    - email
+    - password
+    - phoneNumber
+
+LoginUser:
+  type: object
+  properties:
+    email:
+      type: string
+      example: 'user@example.com'
+    password:
+      type: string
+      format: password
+      example: 'P@ssw0rd!'
+  required:
+    - email
+    - password
+
+# -----------------------------------------------------
+# Common Schemas
+# -----------------------------------------------------
+
+ErrorResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      description: 'The status of the response (e.g., "success" or "error").'
+      enum:
+        - 'error'
+    code:
+      type: integer
+      description: 'The HTTP status code associated with the error.'
+    message:
+      type: string
+      description: 'A human-readable message explaining the error.'
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          path:
+            type: string
+            description: 'The field or path where the error occurred.'
+          message:
+            type: string
+            description: 'A specific message about the error at the given path.'
+  required:
+    - status
+    - code
+    - message
+
+SuccessResponse:
+  type: object
+  properties:
+    status:
+      type: string
+      description: 'The status of the response (e.g., "success" or "error").'
+      enum:
+        - 'error'
+    code:
+      type: integer
+      description: 'The HTTP status code associated with the error.'
+    message:
+      type: string
+      description: 'A human-readable message explaining the error.'
+    data:
+      type: object
+      nullable: true
+      description: 'The response data; null in case of an error.'
+    pagination:
+      type: object
+      nullable: true
+      description: 'Pagination information if applicable.'
+      properties:
+        page:
+          type: integer
+          description: 'Current page number.'
+        totalPage:
+          type: integer
+          description: 'Total number of pages available.'
+        limit:
+          type: integer
+          description: 'Number of items per page.'
+        next:
+          type: integer
+          description: 'Next page number if available.'
+        prev:
+          type: integer
+          description: 'Previous page number if available.'
+        totalItem:
+          type: integer
+          description: 'Total number of items.'
+    links:
+      type: object
+      nullable: true
+      description: 'Links for pagination and navigation.'
+      properties:
+        self:
+          type: string
+          description: 'Link to the current resource.'
+        next:
+          type: string
+          nullable: true
+          description: 'Link to the next resource.'
+        prev:
+          type: string
+          nullable: true
+          description: 'Link to the previous resource.'
+
+  required:
+    - status
+    - code
+    - message
+
+Pagination:
+  type: object
+  nullable: true
+  description: 'Pagination information if applicable.'
+  properties:
+    page:
+      type: integer
+      description: 'Current page number.'
+      default: 1
+    totalPage:
+      type: integer
+      description: 'Total number of pages available.'
+      default: 100
+    limit:
+      type: integer
+      description: 'Number of items per page.'
+      default: 10
+    next:
+      type: integer
+      description: 'Next page number if available.'
+      default: 2
+    prev:
+      type: integer
+      description: 'Previous page number if available.'
+      default: null
+    totalItem:
+      type: integer
+      description: 'Total number of items.'
+      default: 1000
+  required:
+    - page
+    - totalPage
+    - limit
+    - next
+    - prev
+    - totalItem
+
+Timestamp:
+  type: object
+  properties:
+    createdAt:
+      type: string
+      format: date-time
+      example: '2023-10-30T14:30:00Z'
+    updatedAt:
+      type: string
+      format: date-time
+      example: '2023-10-30T15:00:00Z'

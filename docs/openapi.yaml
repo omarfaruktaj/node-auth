@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Node.js Authentication API
+  description: A simple API for user authentication and authorization built with Node.js, providing endpoints for user registration, login, password management, and more.
+  termsOfService: https://termsOfService.blog.com
+  contact:
+    name: Omar
+    url: https://contact.omar.com
+    email: omar@gmail.com
+  license:
+    name: MIT
+    url: https://license.blog.com
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:5000
+    description: Development server
+  - url: https://production.com
+    description: Production server
+
+tags:
+  - name: Auth
+    description: Endpoints related to user authentication and management
+
+paths:
+  /auth/register:
+    $ref: './paths/auth/register.yaml'
+  /auth/login:
+    $ref: './paths/auth/login.yaml'
+  /auth/logout:
+    $ref: './paths/auth/logout.yaml'
+  /auth/forgot-password:
+    $ref: './paths/auth/forgot-password.yaml'
+  /auth/rest-password:
+    $ref: './paths/auth/reset-password.yaml'
+  /auth/change-password:
+    $ref: './paths/auth/change-password.yaml'
+
+components:
+  schemas:
+    $ref: './components/schemas.yaml'
+
+  securitySchemes:
+    $ref: ./components/securitySchemes.yaml

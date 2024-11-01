@@ -1,0 +1,48 @@
+post:
+  summary: 'Register a new user'
+  description: 'Register a new user to the system. The request body must include all required fields such as email, password, and user details.'
+  operationId: createARegister
+  tags:
+    - Auth
+  parameters:
+    - $ref: '../../components/parameters.yaml#/Content-Type'
+  requestBody:
+    required: true
+    description: 'Payload to register a new user.'
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas.yaml#/Register'
+  responses:
+    '201':
+      description: 'User registered successfully.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: 'Indicates the status of the response (e.g., "success").'
+                example: 'success'
+              statusCode:
+                type: integer
+                description: 'HTTP status code for the response.'
+                example: 201
+              message:
+                type: string
+                description: 'A descriptive message about the response.'
+                example: 'User registered successfully.'
+              data:
+                $ref: '../../components/schemas.yaml#/User'
+            required:
+              - status
+              - statusCode
+              - message
+              - data
+    '400':
+      $ref: '../../components/errorResponses.yaml#/BadRequest'
+    '409':
+      $ref: '../../components/errorResponses.yaml#/Conflict'
+    '500':
+      $ref: '../../components/errorResponses.yaml#/InternalServerError'
